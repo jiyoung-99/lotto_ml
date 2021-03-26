@@ -1,48 +1,42 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+# from flask_migrate import Migrate
+import config
 
+db = SQLAlchemy()
+# migrate = Migrate()
 
-# configuration
-DEBUG = True
-
+# 밑에는 
 # instantiate the app
-app = Flask(__name__)
-app.config.from_object(__name__)
-
-# enable CORS
-CORS(app, resources={r'/*': {'origins': '*'}})
+# app = Flask(__name__)
+# app.config.from_object(__name__)
 
 
-# sanity check route
-@app.route('/ping', methods=['GET'])
-def ping_pong():
-    return jsonify('pong!')
+def create_app(config=None):
+    app = Flask(__name__)
+    # enable CORS
+    # CORS(app)
+    CORS(app, resources={r'/*': {'origins': '*'}})
+    # if app.config["ENV"] == 'production':
+    #     app.config.from_object('config.ProductionConfig')
+    # else:
+    #     app.config.from_object('config.DevelopmentConfig')
 
-@app.route('/support', methods=['GET'])
-def all_plaza():
-    return jsonify({
-        'status': 'success',
-        'supports': Support
-    })
+    # if config is not None:
+    #     app.config.update(config)
+
+    # db.init_app(app)
+    # migrate.init_app(app, db)
+
+    from routes import (main_route, ping_route, support_route)
+    app.register_blueprint(main_route.bp)
+    app.register_blueprint(ping_route.bp, url_prefix='/ping')
+    app.register_blueprint(support_route.bp, url_prefix='/support')
+
+    return app
 
 
-if __name__ == '__main__':
-    app.run()
-
-Support = [
-    {
-        'title': 'On the Road',
-        'writer': 'Jack Kerouac',
-        'content': 'gooood'
-    },
-    {
-        'title': 'Harry Potter and the Philosopher\'s Stone',
-        'writer': 'J. K. Rowling',
-        'content': 'gooood'
-    },
-    {
-        'title': 'Green Eggs and Ham',
-        'writer': 'Dr. Seuss',
-        'content': 'gooood'
-    }
-]
+if __name__ == "__main__":
+    app = create_app()
+    app.run(debug=True)
