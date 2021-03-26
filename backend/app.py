@@ -1,11 +1,11 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-# from flask_migrate import Migrate
+from flask_migrate import Migrate
 import config
 
 db = SQLAlchemy()
-# migrate = Migrate()
+migrate = Migrate()
 
 # 밑에는 
 # instantiate the app
@@ -18,16 +18,18 @@ def create_app(config=None):
     # enable CORS
     # CORS(app)
     CORS(app, resources={r'/*': {'origins': '*'}})
-    # if app.config["ENV"] == 'production':
-    #     app.config.from_object('config.ProductionConfig')
-    # else:
-    #     app.config.from_object('config.DevelopmentConfig')
+    if app.config["ENV"] == 'production':
+        print("env")
+        app.config.from_object('config.ProductionConfig')
+    else:
+        print("prodeuct")
+        app.config.from_object('config.DevelopmentConfig')
 
-    # if config is not None:
-    #     app.config.update(config)
+    if config is not None:
+        app.config.update(config)
 
-    # db.init_app(app)
-    # migrate.init_app(app, db)
+    db.init_app(app)
+    migrate.init_app(app, db)
 
     from routes import (main_route, ping_route, support_route)
     app.register_blueprint(main_route.bp)

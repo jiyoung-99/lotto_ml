@@ -5,6 +5,7 @@ Flask==1.0.2
 flask_cors==3.0.10
 Flask-SQLAlchemy==2.5.1
 SQLAlchemy==1.4.3
+Flask-Migrate==2.7.0
 greenlet==1.0.0 
 importlib-metadata==3.7.3
 typing-extensions==3.7.4.3

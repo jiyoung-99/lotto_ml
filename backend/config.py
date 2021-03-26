@@ -6,8 +6,8 @@ class Config(object):
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite+pysqlite:///dev_db.sqlite3'
+    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://jiyoung:lottopassword@localhost:3307/lotto'
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'sqlite+pysqlite:///prod_db.sqlite3'
+    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://jiyoung:lottopassword@localhost:3307/lotto'
