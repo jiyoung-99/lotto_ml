@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Ping from '../components/Ping.vue';
+import Main from '../components/Main.vue';
 import Support from '../components/Support.vue';
+import Lotto from '../components/Lotto.vue';
+
 
 Vue.use(Router);
 
@@ -15,9 +17,14 @@ export default new Router({
       component: Support,
     },
     {
-      path: '/ping',
-      name: 'Ping',
-      component: Ping,
+      path: '/lotto',
+      name: 'Lotto',
+      component: Lotto,
+    },
+    {
+      path: '/',
+      name: 'Main',
+      component: Main,
     },
   ],
 });

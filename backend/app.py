@@ -31,10 +31,11 @@ def create_app(config=None):
     db.init_app(app)
     migrate.init_app(app, db)
 
-    from routes import (main_route, ping_route, support_route)
-    app.register_blueprint(main_route.bp)
-    app.register_blueprint(ping_route.bp, url_prefix='/ping')
-    app.register_blueprint(support_route.bp, url_prefix='/support')
+    from routes import (main_route, ping_route, support_route, lotto_his_route)
+    app.register_blueprint(main_route.bp, url_prefis='/api')
+    app.register_blueprint(ping_route.bp, url_prefix='/api/ping')
+    app.register_blueprint(support_route.bp, url_prefix='/api/support')
+    app.register_blueprint(lotto_his_route.bp, url_prefix='/api/lottohis')
 
     return app
 

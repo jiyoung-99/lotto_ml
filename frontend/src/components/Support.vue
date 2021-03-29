@@ -10,9 +10,9 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Writer</th>
-              <th scope="col">Content</th>
+              <th scope="col">제목</th>
+              <th scope="col">답변받을 연락처를 적어주세요</th>
+              <th scope="col">문의사항내용</th>
               <th></th>
             </tr>
           </thead>
@@ -159,7 +159,7 @@ export default {
   },
   methods: {
     getSupports() {
-      const path = 'http://localhost:5000/support';
+      const path = '/api/support';
       axios.get(path)
         .then((res) => {
           this.supports = res.data.supports;
@@ -170,7 +170,7 @@ export default {
         });
     },
     addSupport(payload) {
-      const path = 'http://localhost:5000/support';
+      const path = '/api/support';
       axios.post(path, payload)
         .then(() => {
           this.getSupports();
@@ -184,7 +184,7 @@ export default {
         });
     },
     updateSupport(payload, s_ID) {
-      const path = `http://localhost:5000/support/${s_ID}`;
+      const path = `/api/support/${s_ID}`;
       axios.put(path, payload)
         .then(() => {
           this.getSupports();
@@ -198,7 +198,7 @@ export default {
         });
     },
     removeSupport(s_ID) {
-      const path = `http://localhost:5000/support/${s_ID}`;
+      const path = `/api/support/${s_ID}`;
       axios.delete(path)
         .then(() => {
           this.getSupports();
@@ -229,7 +229,7 @@ export default {
     },
     onSubmit(evt) {
       evt.preventDefault();
-      this.$refs.addBookModal.hide();
+      this.$refs.addSupportModal.hide();
       // let read = false;
       // if (this.addSupportForm.read[0]) read = true;
       const payload = {
@@ -262,7 +262,7 @@ export default {
       this.$refs.editSupportModal.hide();
       this.initForm();
       this.getSupports(); // why?
-},
+    },
 
   },
   created() {
@@ -270,3 +270,10 @@ export default {
   },
 };
 </script>
+<style>
+.container {
+    padding: 20px;
+    margin: 2em 2em;
+    max-width: 100%;
+}
+</style>
