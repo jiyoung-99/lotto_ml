@@ -28,3 +28,4 @@ SQLAlchemy==1.4.3
 threadpoolctl==2.1.0
 typing-extensions==3.7.4.3
 Werkzeug==1.0.1
+python-dotenv==0.16.0
