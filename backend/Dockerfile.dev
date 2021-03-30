@@ -3,7 +3,7 @@ WORKDIR /www
 ADD . . 
 # RUN python3 -m pip3 install -U pip 
 RUN pip install -r requirements.txt 
-CMD ["python3", "app.py", "--host=0.0.0.0"]
+CMD ["python3", "app.py"]
 EXPOSE 5000
 
 
