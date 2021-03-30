@@ -6,8 +6,9 @@ class Config(object):
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://jiyoung:lottopassword@localhost:3307/lotto'
+    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://lotto:lottopassword@jiyoung-lotto-01.cjycxb02ponv.us-east-2.rds.amazonaws.com:3306/lotto'
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://jiyoung:lottopassword@localhost:3307/lotto'
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://lotto:lottopassword@jiyoung-lotto-01.cjycxb02ponv.us-east-2.rds.amazonaws.com:3306/lotto'

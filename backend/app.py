@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import os
 import config
 
 db = SQLAlchemy()
@@ -14,15 +15,17 @@ migrate = Migrate()
 
 
 def create_app(config=None):
+    
     app = Flask(__name__)
+    cors = CORS(app)
     # enable CORS
     # CORS(app)
-    CORS(app, resources={r'/*': {'origins': '*'}})
+    cors.init_app(app, resources={r'/*': {'origins': '*'}})
     if app.config["ENV"] == 'production':
-        print("env")
+        print("production")
         app.config.from_object('config.ProductionConfig')
     else:
-        print("prodeuct")
+        print("dev")
         app.config.from_object('config.DevelopmentConfig')
 
     if config is not None:
@@ -42,4 +45,6 @@ def create_app(config=None):
 
 if __name__ == "__main__":
     app = create_app()
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    print('port',port)
+    app.run(host="0.0.0.0", debug=True, port=port)
