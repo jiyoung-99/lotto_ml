@@ -12,10 +12,6 @@ services:
       - 8080:8080
     volumes:
       - ./frontend:/app
-    networks:
-      - flask-vue
-    depends_on:
-      - backend
 
   backend:
     container_name: my-back
@@ -29,8 +25,3 @@ services:
       - 5000:5000
     volumes:
       - ./backend:/www
-    networks:
-      - flask-vue
-networks:
-  flask-vue:
-    driver: bridge

@@ -32,6 +32,7 @@ export default {
   methods: {
     onClick() {
       const path = '/api/lottoml';
+      console.log(process.env);
       axios.get(path)
         .then((res) => {
           // console.log(res.data.lotto_result)
