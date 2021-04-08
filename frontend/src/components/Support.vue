@@ -170,7 +170,7 @@ export default {
         });
     },
     addSupport(payload) {
-      const path = '/api/support';
+      const path = '/api/support/';
       axios.post(path, payload)
         .then(() => {
           this.getSupports();
